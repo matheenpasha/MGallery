@@ -1,4 +1,4 @@
 MGallery
 ========
 
-A mobile responsive gallery supported by almost all devices using iSCROLL.
+A mobile responsive gallery supported by almost all devices using IScroll.
