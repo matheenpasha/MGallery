@@ -1040,19 +1040,31 @@
   }
 
 
-
-
-
   function MGallery(wrapper){
 
     var mGallery = this;
+    var carouselConfig = {
+      'scrollX': true,
+      'scrollY': false,
+      'keyBindings': true,
+      'snap': 'li',
+      'snapSpeed': 500,
+      'snapThreshold': 0.15,
+      'momentum': false,
+      'tap': 'scrollerTap',
+      'zoom': true
+    };
     mGallery.wrapper = wrapper;
+    mGallery.scroller = new IScroll(mGallery.viewport, carouselConfig);
 
 
   }
 
   MGallery.prototype = {
 
-  }
+    _resize: function() {
+
+    }
+  };
 
 })(window, document, Math);
