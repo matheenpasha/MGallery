@@ -288,10 +288,6 @@
       }
     };
 
-    me.onImageLoad = function(img, handler){
-      window.addEventListener(img, 'load', handler);
-    };
-
     me.isObject = function(obj){
       var type = typeof obj;
       return type === 'function' || type === 'object' && !!obj;
@@ -332,6 +328,41 @@
         width += el.offsetWidth;
       });
       return width;
+    };
+
+
+    me.throttle = function(func, wait, options) {
+      var context, args, result;
+      var timeout = null;
+      var previous = 0;
+      if (!options) options = {};
+      var later = function() {
+        previous = options.leading === false ? 0 : me.getTime();
+        timeout = null;
+        result = func.apply(context, args);
+        if (!timeout) context = args = null;
+      };
+      return function() {
+        var now = me.getTime();
+        if (!previous && options.leading === false) previous = now;
+        var remaining = wait - (now - previous);
+        context = this;
+        args = arguments;
+        if (remaining <= 0 || remaining > wait) {
+          clearTimeout(timeout);
+          timeout = null;
+          previous = now;
+          result = func.apply(context, args);
+          if (!timeout) context = args = null;
+        } else if (!timeout && options.trailing !== false) {
+          timeout = setTimeout(later, remaining);
+        }
+        return result;
+      };
+    };
+
+    me.onWindowResize = function(callback) {
+      me.addEvent(window, 'onresize', me.throttle(callback, 1000));
     };
 
     return me;
@@ -1040,10 +1071,12 @@
   }
 
 
+  // Actual mGallery source
+
   function MGallery(wrapper){
 
     var mGallery = this;
-    var carouselConfig = {
+    mGallery.carouselConfig = {
       'scrollX': true,
       'scrollY': false,
       'keyBindings': true,
@@ -1055,16 +1088,43 @@
       'zoom': true
     };
     mGallery.wrapper = wrapper;
-    mGallery.scroller = new IScroll(mGallery.viewport, carouselConfig);
+    //TODO: update the number of images....
+    mGallery.noOfImages = 0;
+    mGallery.scroller = null;
 
 
   }
 
   MGallery.prototype = {
 
-    _resize: function() {
+    getViewPort: function() {
 
+    },
+
+    refreshList: function() {
+
+    },
+
+    positionList: function() {
+
+    },
+
+
+    loadImage: function(n) {
+
+    },
+
+    _resize: function() {
+      var mGallery = this;
+      mGallery.refreshList();
+      mGallery.positionList();
+      mGallery.scroller == null ? mGallery.scroller = new IScroll(mGallery.getViewPort(), mGallery.carouselConfig) : mGallery.scroller.refresh();
+      //load the second image.
+      mGallery.loadImage(1);
+      //mGallery.noOfImages > 1 ? mGallery.showButton(gallery.nextButton()) : mGallery.hideButton(gallery.nextButton());
     }
+
+
   };
 
 })(window, document, Math);
