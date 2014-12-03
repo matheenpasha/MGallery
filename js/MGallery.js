@@ -331,37 +331,37 @@
     };
 
 
-    me.throttle = function(func, wait, options) {
+    me.throttle = function(func, wait, options){
       var context, args, result;
       var timeout = null;
       var previous = 0;
-      if (!options) options = {};
-      var later = function() {
+      if(!options) options = {};
+      var later = function(){
         previous = options.leading === false ? 0 : me.getTime();
         timeout = null;
         result = func.apply(context, args);
-        if (!timeout) context = args = null;
+        if(!timeout) context = args = null;
       };
-      return function() {
+      return function(){
         var now = me.getTime();
-        if (!previous && options.leading === false) previous = now;
+        if(!previous && options.leading === false) previous = now;
         var remaining = wait - (now - previous);
         context = this;
         args = arguments;
-        if (remaining <= 0 || remaining > wait) {
+        if(remaining <= 0 || remaining > wait){
           clearTimeout(timeout);
           timeout = null;
           previous = now;
           result = func.apply(context, args);
-          if (!timeout) context = args = null;
-        } else if (!timeout && options.trailing !== false) {
+          if(!timeout) context = args = null;
+        } else if(!timeout && options.trailing !== false){
           timeout = setTimeout(later, remaining);
         }
         return result;
       };
     };
 
-    me.onWindowResize = function(callback) {
+    me.onWindowResize = function(callback){
       me.addEvent(window, 'onresize', me.throttle(callback, 1000));
     };
 
@@ -1076,45 +1076,76 @@
   function MGallery(wrapper){
 
     var mGallery = this;
-    mGallery.carouselConfig = {
-      'scrollX': true,
-      'scrollY': false,
-      'keyBindings': true,
-      'snap': 'li',
-      'snapSpeed': 500,
-      'snapThreshold': 0.15,
-      'momentum': false,
-      'tap': 'scrollerTap',
-      'zoom': true
+
+    mGallery.scroller = null;
+    mGallery.options = {
+      carouselConfig: {
+        'scrollX': true,
+        'scrollY': false,
+        'keyBindings': true,
+        'snap': 'li',
+        'snapSpeed': 500,
+        'snapThreshold': 0.15,
+        'momentum': false,
+        'tap': 'scrollerTap',
+        'zoom': true
+      },
+
+      _galleryDom: wrapper,
+
+      autoplaygap: 5000,
+
+      controlsGap: 3000,
+
+      autoplaytimer: null,
+
+      autoPlay: false,
+
+      controlsTimer: null,
+
+      noOfImages: null,
+
+      isOpen: false,
+
+      isCLosed: true,
+
     };
-    mGallery.wrapper = wrapper;
     //TODO: update the number of images....
     mGallery.noOfImages = 0;
-    mGallery.scroller = null;
 
 
   }
 
   MGallery.prototype = {
 
-    getViewPort: function() {
+    onHide: function() {
+      this.isCLosed = true;
 
     },
 
-    refreshList: function() {
+    onOpen: function() {
+      this.isOpen = true;
 
     },
 
-    positionList: function() {
+    getViewPort: function(){
+
+    },
+
+    refreshList: function(){
+
+    },
+
+    positionList: function(){
 
     },
 
 
-    loadImage: function(n) {
+    loadImage: function(n){
 
     },
 
-    _resize: function() {
+    _resize: function(){
       var mGallery = this;
       mGallery.refreshList();
       mGallery.positionList();
