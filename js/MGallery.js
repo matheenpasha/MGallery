@@ -1073,9 +1073,11 @@
 
   // Actual mGallery source
 
-  function MGallery(wrapper){
+  function MGallery(wrapper, options){
 
     var mGallery = this;
+
+
 
     mGallery.scroller = null;
     mGallery.options = {
@@ -1113,6 +1115,7 @@
     //TODO: update the number of images....
     mGallery.noOfImages = 0;
 
+    mGallery.viewportList = mGallery._galleryDom.querySelectorAll('ul')[0];
 
   }
 
@@ -1125,10 +1128,6 @@
 
     onOpen: function() {
       this.isOpen = true;
-
-    },
-
-    getViewPort: function(){
 
     },
 

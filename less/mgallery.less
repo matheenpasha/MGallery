@@ -6,6 +6,25 @@
 
 //-------------------- mixins
 
+.b {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+}
+
+.c {
+  &:before {
+    display: table;
+    content: "";
+  }
+  &:after {
+    display: table;
+    content: "";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
 .transition-all(@transition) {
   -webkit-transition: all @transition ease-in-out;
   -moz-transition: all @transition ease-in-out;
