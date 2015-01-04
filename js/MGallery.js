@@ -1134,6 +1134,45 @@
 
   MGallery.prototype = {
 
+
+
+    on: function(type, fn){
+      if(!this._events[type]){
+        this._events[type] = [];
+      }
+
+      this._events[type].push(fn);
+    },
+
+    off: function(type, fn){
+      if(!this._events[type]){
+        return;
+      }
+
+      var index = this._events[type].indexOf(fn);
+
+      if(index > -1){
+        this._events[type].splice(index, 1);
+      }
+    },
+
+    _execEvent: function(type){
+      if(!this._events[type]){
+        return;
+      }
+
+      var i = 0,
+      l = this._events[type].length;
+
+      if(!l){
+        return;
+      }
+
+      for(; i < l; i++){
+        this._events[type][i].apply(this, [].slice.call(arguments, 1));
+      }
+    },
+
     open: function() {
       var mGallery = this;
       utils.removeClass(mGallery._galleryDom, 'hide');
@@ -1150,12 +1189,12 @@
 
     onHide: function(callback) {
       this.isCLosed = true;
-
+      this._execEvent('onHide');
     },
 
     onOpen: function() {
       this.isOpen = true;
-
+      this._execEvent('onOpen');
     },
 
     buildGallery: function() {
