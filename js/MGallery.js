@@ -375,7 +375,7 @@
 
     this.options = {
 
-// INSERT POINT: OPTIONS 
+// INSERT POINT: OPTIONS
 
       startX: 0,
       startY: 0,
@@ -388,7 +388,7 @@
       bounceEasing: '',
 
       preventDefault: true,
-      preventDefaultException: {tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/},
+      preventDefaultException: {tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT|LI)$/},
 
       HWCompositing: true,
       useTransition: true,
@@ -1011,6 +1011,7 @@
       this.isAnimating = true;
       step();
     },
+
     handleEvent: function(e){
       switch(e.type){
         case 'touchstart':
@@ -1071,16 +1072,19 @@
   }
 
 
+
   // Actual mGallery source
 
-  function MGallery(wrapper, options){
+  function MGallery(/* element */wrapper, /*object*/ options){
 
     var mGallery = this;
 
 
 
     mGallery.scroller = null;
+    mGallery._galleryDom = wrapper;
     mGallery.options = {
+      // default carousel settings for best performance
       carouselConfig: {
         'scrollX': true,
         'scrollY': false,
@@ -1092,8 +1096,6 @@
         'tap': 'scrollerTap',
         'zoom': true
       },
-
-      _galleryDom: wrapper,
 
       autoplaygap: 5000,
 
@@ -1112,16 +1114,41 @@
       isCLosed: true,
 
     };
-    //TODO: update the number of images....
-    mGallery.noOfImages = 0;
 
+    // This list holds all the images.
     mGallery.viewportList = mGallery._galleryDom.querySelectorAll('ul')[0];
+
+    //list Items
+    mGallery.listItems = mGallery.viewportList.querySelectorAll('li');
+
+    // The close Button 'x' mark
+    mGallery.closeButton = mGallery._galleryDom.querySelectorAll('.close')[0];
+
+    //TODO: update the number of images....
+    mGallery.noOfImages = mGallery.listItems.length;
+
+    //Build the Gallery
+    mGallery.buildGallery();
 
   }
 
   MGallery.prototype = {
 
-    onHide: function() {
+    open: function() {
+      var mGallery = this;
+      utils.removeClass(mGallery._galleryDom, 'hide');
+      utils.addClass(mGallery._galleryDom, 'show');
+      mGallery.onOpen();
+    },
+
+    hide: function() {
+      var mGallery = this;
+      utils.addClass(mGallery._galleryDom, 'hide');
+      utils.removeClass(mGallery._galleryDom, 'show');
+      mGallery.onHide();
+    },
+
+    onHide: function(callback) {
       this.isCLosed = true;
 
     },
@@ -1129,6 +1156,18 @@
     onOpen: function() {
       this.isOpen = true;
 
+    },
+
+    buildGallery: function() {
+      var mGallery = this;
+      mGallery._attachEvents();
+    },
+
+    _attachEvents: function() {
+      var mGallery = this;
+      utils.addEvent(mGallery.closeButton, 'click', function(){
+        mGallery.hide();
+      }, false);
     },
 
     refreshList: function(){
@@ -1144,6 +1183,10 @@
 
     },
 
+    getViewPort: function(){
+
+    },
+
     _resize: function(){
       var mGallery = this;
       mGallery.refreshList();
@@ -1156,5 +1199,10 @@
 
 
   };
+
+
+
+
+  window.MGallery = MGallery;
 
 })(window, document, Math);

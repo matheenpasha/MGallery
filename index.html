@@ -36,7 +36,11 @@
 <div id="page">
     <div class="content-width">
     <h1 class="title">MGallery Demo</h1>
-    <div id="mobile-gallery" class="quadratic hide preview hide-controls">
+
+    <input id="trigger" type="button" value="Open Gallery"></input>
+
+    <!-- Gallery dom-->
+    <div id="mobile-gallery" class="quadratic hide preview show-controls">
         <div class="title b"><span></span><i class="caret close b"></i></div>
         <a href="#" class="button transparent b close">Back</a>
         <div class="viewport">
@@ -59,5 +63,25 @@
 </div>
 
 <script type="text/javascript" src="js/MGallery.js"></script>
+<script>
+
+function init() {
+  var container = document.querySelectorAll('#mobile-gallery')[0];
+  var gallery = null;
+  gallery = new MGallery(container, null);
+
+  var button = document.getElementById('trigger');
+  button.addEventListener('click', function(){
+    if(gallery !== null) {
+      gallery.open();
+    }
+  }, false);
+}
+
+window.addEventListener('load', function(){
+  init();
+}, false);
+
+</script>
 </body>
 </html>
