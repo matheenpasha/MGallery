@@ -1082,9 +1082,11 @@
 
 
     mGallery.scroller = null;
+    mGallery._events = {};
+    mGallery.pageNo = 0;
     mGallery._galleryDom = wrapper;
     mGallery.options = {
-      // default carousel settings for best performance
+      // default carousel settings for best/optimal performance
       carouselConfig: {
         'scrollX': true,
         'scrollY': false,
@@ -1124,7 +1126,7 @@
     // The close Button 'x' mark
     mGallery.closeButton = mGallery._galleryDom.querySelectorAll('.close')[0];
 
-    //TODO: update the number of images....
+    //number of images based on number of list items
     mGallery.noOfImages = mGallery.listItems.length;
 
     //Build the Gallery
@@ -1171,6 +1173,26 @@
       for(; i < l; i++){
         this._events[type][i].apply(this, [].slice.call(arguments, 1));
       }
+    },
+
+    showControls: function() {
+      var mGallery = this;
+      utils.removeClass(mGallery._galleryDom, 'hide-controls');
+      mGallery.controlsTimer ? clearTimeout(mGallery.controlsTimer) : '';
+      mGallery.controlsTimer = setTimeout(function() {
+        mGallery.hideControls()
+      }, mGallery.options.controlsGap);
+    },
+
+    isControlsShowing: function() {
+      var mGallery = this;
+      return !utils.hasClass(mGallery._galleryDom, 'hide-controls');
+    },
+
+    hideControls: function() {
+      var mGallery = this;
+      utils.addClass(mGallery._galleryDom, 'hide-controls');
+      clearTimeout(mGallery.controlsTimer);
     },
 
     open: function() {
@@ -1223,7 +1245,7 @@
     },
 
     getViewPort: function(){
-
+      return this._galleryDom.querySelectorAll('.viewport')[0];
     },
 
     _resize: function(){
