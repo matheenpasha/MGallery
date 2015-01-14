@@ -390,7 +390,7 @@
 
       snapThreshold: 0.334,
 
-// INSERT POINT: OPTIONS 
+// INSERT POINT: OPTIONS
 
       startX: 0,
       startY: 0,
@@ -2155,7 +2155,7 @@
 
     mGallery.scroller = null;
     mGallery._events = {};
-    mGallery.pageNo = 0;
+    mGallery.currentPageNo = 1;
     mGallery._galleryDom = wrapper;
     mGallery.options = {
       // default carousel settings for best/optimal performance
@@ -2318,6 +2318,11 @@
       utils.addEvent(mGallery._galleryDom, 'scrollerTap', function() {
         mGallery.isControlsShowing() ? mGallery.hideControls() : mGallery.showControls();
       }, false);
+
+      mGallery.scroller.on('scrollEnd', function () {
+        mGallery.currentPageNo = mGallery.scroller.currentPage.pageX + 1;
+        mGallery.loadImage(mGallery.currentPageNo - 1);
+      });
     },
 
 
@@ -2384,12 +2389,13 @@
           mGallery._resize();
           //mGallery.windowSlidedListener();
           utils.addClass(mGallery.getViewPort(), 'fade-in');
+
+          mGallery._attachEvents();
         }, 1000);
       };
       utils.addEvent(img, 'load', handler, false);
 
       mGallery.loadImage(0);
-      mGallery._attachEvents();
       mGallery.isGalleryReady = true;
     }
 
