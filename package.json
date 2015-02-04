@@ -1,0 +1,27 @@
+{
+  "name": "MGallery",
+  "version": "0.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "latest",
+    "del": "latest",
+    "gulp-server-livereload": "latest",
+    "gulp-jshint": "~1.9.2",
+    "gulp-changed": "~1.1.1",
+    "gulp-imagemin": "2.1.0",
+    "gulp-minify-html": "latest",
+    "gulp-concat": "latest",
+    "gulp-strip-debug": "latest",
+    "gulp-uglify": "latest",
+    "gulp-less": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-minify-css": "latest"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "setup": "./setup.sh"
+  }
+}
