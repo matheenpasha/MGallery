@@ -50,7 +50,7 @@ gulp.task('compressImages', ['clean'], function (){
 
 //concat and minify js
 gulp.task('build-scripts', ['clean'], function (){
-  return gulp.src(['./src/js/*.js'])
+  return gulp.src(['./src/js/iscroll.js', './src/js/MGallery.js'])
     .pipe(concat('mgallery-min.js'))
     .pipe(stripDebug())
     .pipe(uglify())
