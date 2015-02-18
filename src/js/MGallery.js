@@ -65,6 +65,12 @@
     // get all the data
     mGallery.galleryData = [];
 
+    //next button
+    mGallery.nextButton =  mGallery._galleryDom.querySelectorAll('.next')[0];
+
+    //previous button
+    mGallery.prevButton =  mGallery._galleryDom.querySelectorAll('.prev')[0];
+
     utils.each(mGallery.images, function (img){
       mGallery.galleryData.push({
         'image': img,
@@ -77,6 +83,17 @@
 
   MGallery.prototype = {
 
+    hideButton: function(button) {
+      if(!utils.hasClass(button, 'hide')){
+        utils.addClass(button, 'hide');
+      }
+    },
+
+    showButton: function(button) {
+      if(utils.hasClass(button, 'hide')){
+        utils.removeClass(button, 'hide');
+      }
+    },
 
     determineViewPortWidth: function (){
       return document.documentElement.clientWidth;
@@ -141,6 +158,29 @@
       clearTimeout(mGallery.controlsTimer);
     },
 
+    stopAutoplay: function() {
+      var mGallery = this;
+      //domClass.remove(controls.playButton(), 'stop');
+      clearInterval(mGallery.autoplaytimer);
+      mGallery.showControls();
+      mGallery.autoplaytimer = null;
+      mGallery.autoPlay = false;
+    },
+
+    startAutoplay: function() {
+      var mGallery = this;
+      mGallery.autoPlay = true;
+      //domClass.add(controls.playButton(), 'stop');
+      mGallery.autoplaytimer = setInterval(function() {
+        if(mGallery.noOfImages === mGallery.scroller.currentPage.pageX + 1){
+          mGallery.stopAutoplay();
+        } else {
+          mGallery.scroller.next();
+        }
+      }, mGallery.autoplaygap);
+      mGallery.showControls();
+    },
+
     open: function (){
       var mGallery = this;
       utils.removeClass(mGallery._galleryDom, 'hide');
@@ -179,6 +219,28 @@
         mGallery.hide();
       }, false);
 
+      utils.addEvent(mGallery.nextButton, 'click', function (){
+        if (!mGallery.autoPlay){
+          mGallery.scroller.next();
+          mGallery.showControls();
+        } else {
+          mGallery.stopAutoplay();
+          mGallery.scroller.next();
+          mGallery.showControls();
+        }
+      }, false);
+
+      utils.addEvent(mGallery.prevButton, 'click', function (){
+        if (!mGallery.autoPlay){
+          mGallery.scroller.prev();
+          mGallery.showControls();
+        } else {
+          mGallery.stopAutoplay();
+          mGallery.scroller.prev();
+          mGallery.showControls();
+        }
+      }, false);
+
       utils.addEvent(mGallery._galleryDom, 'scrollerTap', function (){
         if (mGallery.isControlsShowing()){
           mGallery.hideControls();
@@ -189,6 +251,21 @@
 
       mGallery.scroller.on('scrollEnd', function (){
         mGallery.currentPageNo = mGallery.scroller.currentPage.pageX + 1;
+
+        if(mGallery.noOfImages > 1) {
+          if(mGallery.currentPageNo === 1) {
+            mGallery.hideButton(mGallery.prevButton);
+            mGallery.showButton(mGallery.nextButton);
+          }
+          if(mGallery.currentPageNo > 1 && mGallery.currentPageNo < (mGallery.noOfImages)) {
+            mGallery.showButton(mGallery.prevButton);
+            mGallery.showButton(mGallery.nextButton);
+          }
+          if(mGallery.currentPageNo === mGallery.noOfImages) {
+            mGallery.hideButton(mGallery.nextButton);
+            mGallery.showButton(mGallery.prevButton);
+          }
+        }
         mGallery.loadImage(mGallery.currentPageNo);
       });
 
@@ -255,7 +332,9 @@
       }
       //load the second image.
       mGallery.loadImage(1);
-      //mGallery.noOfImages > 1 ? mGallery.showButton(gallery.nextButton()) : mGallery.hideButton(gallery.nextButton());
+      if(mGallery.noOfImages > 1 ){
+        mGallery.showButton(mGallery.nextButton);
+      }
     },
 
     buildGallery: function (){

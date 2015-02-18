@@ -88,7 +88,7 @@ gulp.task('build', ['jshint', 'build-scripts', 'compressImages', 'less']);
 
 
 gulp.task('watch', function (){
-  gulp.watch('./src/scripts/*.js', ['jshint', 'build-scripts']);
+  gulp.watch('./src/js/*.js', ['jshint', 'build-scripts']);
   gulp.watch('./src/images/**/*', ['compressImages']);
   gulp.watch('./src/less/*.less', ['less']);
 });
