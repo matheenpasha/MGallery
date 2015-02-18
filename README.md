@@ -11,9 +11,10 @@ You can have a look at the index.html file for demo
 
 
 
-
-         </head>
+         <head>
+         ...
          <link rel="stylesheet" href="gallery.css"/>
+         </head>
          ...
          <body>
          <div id="mobile-gallery" class="quadratic hide preview show-controls">
@@ -36,6 +37,7 @@ You can have a look at the index.html file for demo
                      <i class="caret next b hide"></i>
                  </div>
           </div>
+          <script type="text/javascript" src="mgallery-min.js"></script>
          </body>
 
 
