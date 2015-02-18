@@ -7,33 +7,39 @@ A mobile responsive gallery supported by almost all devices using <a href="http:
 
 You can have a look at the index.html file for demo
 
-1. Include the HTML structure in the page:
+1. Here is the basic configuation:
 
-    <div id="mobile-gallery" class="quadratic hide preview show-controls">
-            <div class="title b"><span></span><i class="caret close b"></i></div>
-            <a href="#" class="button transparent b close">Back</a>
-            <div class="viewport">
-                <ul>
-                    <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_1.jpg" alt="Loading"/></li>
-                    <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_2.jpg" alt="Loading"/></li>
-                    <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_3.jpg" alt="Loading"/></li>
-                    <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_4.jpg" alt="Loading"/></li>
-                    <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_5.jpg" alt="Loading"/></li>
-                    <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_6.jpg" alt="Loading"/></li>
-                </ul>
-            </div>
-            <div class="controls b">
-                <i class="caret b play"></i>
-                <i class="caret prev b hide"></i>
-                <i class="caret next b hide"></i>
-            </div>
-     </div>
 
-2. Include the build/js/m-gallery-min.js in your page
 
-3. Include the build/css/mgallery.css in your page
 
-4. Finally build the Mgallery
+         </head>
+         <link rel="stylesheet" href="gallery.css"/>
+         ...
+         <body>
+         <div id="mobile-gallery" class="quadratic hide preview show-controls">
+                 <div class="title b"><span></span><i class="caret close b"></i></div>
+                 <a href="#" class="button transparent b close">Back</a>
+                 <div class="viewport">
+                     <ul>
+                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_1.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_2.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_3.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_4.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_5.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_6.jpg" alt="Loading"/></li>
+                         ...
+                     </ul>
+                 </div>
+                 <div class="controls b">
+                     <i class="caret b play"></i>
+                     <i class="caret prev b hide"></i>
+                     <i class="caret next b hide"></i>
+                 </div>
+          </div>
+         </body>
+
+
+2. Finally build the Mgallery
 
      <script type="javascript/text">
 
@@ -55,3 +61,6 @@ You can have a look at the index.html file for demo
          }, false);
 
      </script>
+
+
+     To be continued...
