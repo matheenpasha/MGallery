@@ -138,6 +138,7 @@
 
     showControls: function (){
       var mGallery = this;
+      // SLides the controls in from top and bottom
       utils.removeClass(mGallery._galleryDom, 'hide-controls');
       if (mGallery.controlsTimer !== null){
         clearTimeout(mGallery.controlsTimer);
@@ -183,6 +184,7 @@
 
     open: function (){
       var mGallery = this;
+      // Open the Gallery
       utils.removeClass(mGallery._galleryDom, 'hide');
       utils.addClass(mGallery._galleryDom, 'show');
       mGallery.onOpen();
@@ -190,12 +192,13 @@
 
     hide: function (){
       var mGallery = this;
+      // Close the Gallery
       utils.addClass(mGallery._galleryDom, 'hide');
       utils.removeClass(mGallery._galleryDom, 'show');
       mGallery.onHide();
     },
 
-    onHide: function (callback){
+    onHide: function (){
       this.isCLosed = true;
       this._execEvent('onHide');
     },
@@ -212,6 +215,8 @@
 
     _attachEvents: function (){
       var mGallery = this;
+
+      //attach all the events for controls
       utils.addEvent(mGallery.closeButton, 'click', function (){
         if (mGallery.isControlsShowing === true){
           mGallery.hideControls();
@@ -241,6 +246,7 @@
         }
       }, false);
 
+      // Slides in/out the controls when user taps on the gallery
       utils.addEvent(mGallery._galleryDom, 'scrollerTap', function (){
         if (mGallery.isControlsShowing()){
           mGallery.hideControls();
@@ -249,6 +255,8 @@
         }
       }, false);
 
+
+      // hide and show the next/previous button based on which page we are.
       mGallery.scroller.on('scrollEnd', function (){
         mGallery.currentPageNo = mGallery.scroller.currentPage.pageX + 1;
 
@@ -269,6 +277,7 @@
         mGallery.loadImage(mGallery.currentPageNo);
       });
 
+      // resize the list and refresh the iScroll object
       utils.onWindowResize(function() {
         if(mGallery.isOpen) {
           mGallery._resize();
@@ -290,6 +299,7 @@
 
     refreshList: function (){
       var mGallery = this;
+      //set the width of each li based on screen size
       var viewPortWidth = mGallery.determineViewPortWidth();
       utils.each(mGallery.listItems, function (el){
         el.style.width = viewPortWidth + 'px';
@@ -303,6 +313,7 @@
 
     loadImage: function (n){
       var mGallery = this;
+      //lazy loading the images only when they are required
       if(mGallery.images[n]) {
         var handler = function (){
           utils.removeClass(img, 'loading');
@@ -339,7 +350,7 @@
 
     buildGallery: function (){
       var mGallery = this;
-
+      //load the first image then set the width of the rest of the li's based on the width of the first li
       var img = mGallery.images[0];
       var handler = function (){
         utils.removeEvent(img, 'load', this);
