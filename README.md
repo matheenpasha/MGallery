@@ -3,13 +3,12 @@
 
 A mobile responsive gallery supported by almost all devices using <a href="http://iscrolljs.com">IScroll</a>.
 
-<h2 id="getting-started">Getting started</h2>
 
 ##Usage
 
 You can have a look at the index.html file for demo
 
-1. Here is the basic configuation:
+Here is the basic configuation:
 
 
 
@@ -43,7 +42,7 @@ You can have a look at the index.html file for demo
          </body>
 
 
-2. Finally build the Mgallery
+Finally build the Mgallery
 
         ``` javascript
 
