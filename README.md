@@ -5,6 +5,8 @@ A mobile responsive gallery supported by almost all devices using <a href="http:
 
 <h2 id="getting-started">Getting started</h2>
 
+##Usage
+
 You can have a look at the index.html file for demo
 
 1. Here is the basic configuation:
@@ -43,7 +45,7 @@ You can have a look at the index.html file for demo
 
 2. Finally build the Mgallery
 
-     <script type="javascript/text">
+        ``` javascript
 
          function init() {
            var container = document.querySelectorAll('#mobile-gallery')[0];
@@ -62,7 +64,7 @@ You can have a look at the index.html file for demo
            init();
          }, false);
 
-     </script>
+         ```
 
 
      To be continued...
