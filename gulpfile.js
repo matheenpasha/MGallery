@@ -27,7 +27,7 @@ var minifyCSS = require('gulp-minify-css');
 
 
 // CSS concat, auto-prefix and minify
-gulp.task('less', ['clean'], function (){
+gulp.task('less', ['clean-styles'], function (){
   return gulp.src('./src/less/*.less')
     .pipe(less())
     .pipe(gulp.dest('./src/css'))
@@ -38,7 +38,7 @@ gulp.task('less', ['clean'], function (){
 });
 
 // minify new images
-gulp.task('compressImages', ['clean'], function (){
+gulp.task('compressImages', ['clean-images'], function (){
   var imgSrc = './src/images/**/*',
     imgDst = './build/images';
 
@@ -49,7 +49,7 @@ gulp.task('compressImages', ['clean'], function (){
 });
 
 //concat and minify js
-gulp.task('build-scripts', ['clean'], function (){
+gulp.task('build-scripts', ['clean-scripts'], function (){
   return gulp.src(['./src/js/iscroll.js', './src/js/MGallery.js'])
     .pipe(concat('mgallery-min.js'))
     .pipe(stripDebug())
@@ -67,7 +67,7 @@ gulp.task('jshint', function (){
 
 
 //actual server for the code
-gulp.task('serve', ['build'], function (){
+gulp.task('serve', ['build', 'watch'], function (){
   gulp.src('./')
     .pipe(server({
       port: 5001,
@@ -78,9 +78,22 @@ gulp.task('serve', ['build'], function (){
     }));
 });
 
-gulp.task('clean', function (cb){
+//Cleaning tasks...
+gulp.task('clean-scripts', function (cb){
   del([
-    'build/*/**'
+    'build/js/*'
+  ], cb);
+});
+
+gulp.task('clean-styles', function (cb){
+  del([
+    'build/css/*'
+  ], cb);
+});
+
+gulp.task('clean-images', function (cb){
+  del([
+    'build//images/*'
   ], cb);
 });
 

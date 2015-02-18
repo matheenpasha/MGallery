@@ -1,5 +1,5 @@
 
-  // Actual mGallery source
+  // MGallery source
 
   (function (window, document, Math){
 
