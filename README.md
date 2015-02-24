@@ -10,6 +10,7 @@ You can have a look at the index.html file for demo
 
 Here is the basic configuation:
 
+```html
 
 
          <head>
@@ -40,14 +41,14 @@ Here is the basic configuation:
           </div>
           <script type="text/javascript" src="mgallery-min.js"></script>
          </body>
-
+```
 
 Finally build the Mgallery
 
-        ``` javascript
+  ```js
            gallery = new MGallery(container, options);
 
-         ```
+```
 
 
      To be continued...
