@@ -24,12 +24,12 @@ Here is the basic configuation:
                  <a href="#" class="button transparent b close">Back</a>
                  <div class="viewport">
                      <ul>
-                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_1.jpg" alt="Loading"/></li>
-                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_2.jpg" alt="Loading"/></li>
-                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_3.jpg" alt="Loading"/></li>
-                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_4.jpg" alt="Loading"/></li>
-                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_5.jpg" alt="Loading"/></li>
-                         <li class="b"><img src="build/images/p.gif" mainSrc="build/images/m_gallery_6.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="p.gif" mainSrc="m_gallery_1.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="p.gif" mainSrc="m_gallery_2.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="p.gif" mainSrc="m_gallery_3.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="p.gif" mainSrc="m_gallery_4.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="p.gif" mainSrc="m_gallery_5.jpg" alt="Loading"/></li>
+                         <li class="b"><img src="p.gif" mainSrc="m_gallery_6.jpg" alt="Loading"/></li>
                          ...
                      </ul>
                  </div>
