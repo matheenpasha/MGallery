@@ -46,21 +46,18 @@ Here is the basic configuation:
 Finally build the Mgallery
 
 ```js
-function init() {
   var container = document.querySelectorAll('#mobile-gallery')[0];
-  var gallery = null;
-  gallery = new MGallery(container, null);
+  var gallery = new MGallery(container /* gallery conatiner */, options /* object */ );
+  
+  // trigger
   var button = document.getElementById('trigger');
+  
+  //open the gallery on click  of the trigger
   button.addEventListener('click', function(){
     if(gallery !== null) {
        gallery.open();
      }
   }, false);
-}
-window.addEventListener('load', function(){
-init();
-}, false);
-
 ```
 
 
