@@ -21,6 +21,7 @@ var less = require('gulp-less');
 var path = require('path');
 var autoprefix = require('gulp-autoprefixer');
 var minifyCSS = require('gulp-minify-css');
+var karma = require('karma').server;
 
 
 // register all the tasks
@@ -63,6 +64,18 @@ gulp.task('jshint', function (){
   return gulp.src('./src/js/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
+});
+
+
+
+/**
+ * Run test once and exit
+ */
+gulp.task('test', function (done) {
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: true
+  }, done);
 });
 
 
