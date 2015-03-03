@@ -7,6 +7,9 @@
 
   function MGallery(/* element */wrapper, /*object*/ options){
 
+    if (!wrapper)
+      throw new Error("missing gallery dom");
+
     var mGallery = this;
     mGallery.isGalleryReady = false;
 
@@ -14,7 +17,7 @@
     mGallery.scroller = null;
     mGallery._events = {};
     mGallery.currentPageNo = 1;
-    mGallery._galleryDom = wrapper;
+    mGallery._galleryDom = typeof wrapper === 'string' ? document.querySelector(wrapper) : wrapper;
     mGallery.options = {
       // default carousel settings for best/optimal performance
       carouselConfig: {

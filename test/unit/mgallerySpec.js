@@ -2,15 +2,16 @@
 
 
 
-define(['IScroll', 'MGallery'], function(IScroll, mgallery){
+define(['MGallery'], function(mgallery){
 
   describe("MGallery", function() {
 
     describe("constructor", function() {
-      it("should have a default name", function() {
-        //var gallery = new mgallery();
-        //expect(gallery.scroller).to.equal(null);
-        expect(3).to.equal(3);
+
+      it("should throw if no wrapper/HTML is passed in", function() {
+        expect(function() {
+          (new mgallery())
+        }).to.throw(Error);
       });
 
     });

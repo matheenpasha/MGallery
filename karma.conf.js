@@ -7,7 +7,7 @@ module.exports = function (config) {
     frameworks: ['requirejs', 'mocha', 'sinon-chai'],
 
     files: [
-      {pattern: 'src/js/**/*.js', included: false},
+      {pattern: 'build/js/**/*.js', included: false},
       {pattern: 'test/unit/**/*.js', included: false},
       'test/test-main.js'
     ],
