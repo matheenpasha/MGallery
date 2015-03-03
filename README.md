@@ -46,8 +46,7 @@ Here is the basic configuation:
 Finally build the Mgallery
 
 ```js
-  var container = document.querySelectorAll('#mobile-gallery')[0];
-  var gallery = new MGallery(container /* gallery conatiner */, options /* object */ );
+  var gallery = new MGallery('#mobile-gallery' /* gallery conatiner */, options /* object */ );
   
   // trigger
   var button = document.getElementById('trigger');
