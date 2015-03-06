@@ -245,14 +245,44 @@
   height: 44px;
   top: 0;
 }
-.quadratic .controls .caret.play {
-  left: 0;
+.quadratic .controls .caret.play-control {
+  left: 5px;
+  top: 4px;
+  height: 35px;
+  width: 35px;
   font-size: 33px;
-  padding-top: 3px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+.quadratic .controls .caret.play-control .triangle {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  position: absolute;
+  border-bottom: 8px solid transparent;
+  border-top: 8px solid transparent;
+  border-left: 14px solid #fff;
+  top: 8px;
+  left: 11px;
+}
+.quadratic .controls .caret.play-control .square {
+  display: none;
+  height: 12px;
+  width: 12px;
+  position: absolute;
+  background: #fff;
+  top: 10px;
+  left: 10px;
+}
+.quadratic .controls .caret.play-control.pause .square {
+  display: inline-block;
+}
+.quadratic .controls .caret.play-control.pause .triangle {
+  display: none;
 }
 .quadratic .controls .caret.prev,
 .quadratic .controls .caret.next {

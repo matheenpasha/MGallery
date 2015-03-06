@@ -217,11 +217,44 @@
       width:44px;
       height:44px;
       top:0;
-      &.play {
-        left:0;
+      &.play-control {
+        left:5px;
+        top: 4px;
+        height: 35px;
+        width:35px;
         font-size:33px;
-        padding-top:3px;
         .transition-all(0.3s);
+        border-radius: 50%;
+        border: 2px solid #fff;
+          .triangle {
+            display: inline-block;
+            height: 0;
+            width: 0;
+            position: absolute;
+            border-bottom: 8px solid transparent;
+            border-top: 8px solid transparent;
+            border-left: 14px solid #fff;
+            top: 8px;
+            left: 11px;
+          }
+          .square {
+            display: none;
+            height: 12px;
+            width: 12px;
+            position: absolute;
+            background: #fff;
+            top: 10px;
+            left: 10px;
+          }
+          &.pause {
+            .square {
+              display: inline-block;
+            }
+            .triangle {
+              display: none;
+            }
+          }
+
       }
       &.prev, &.next {
         font-size:22px;

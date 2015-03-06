@@ -54,7 +54,10 @@
             </ul>
         </div>
         <div class="controls b">
-            <i class="caret b play"></i>
+            <span class="caret b play-control">
+                <span class="triangle"></span>
+                <span class="square"></span>
+            </span>
             <i class="caret prev b hide">&#9668;</i>
             <i class="caret next b hide">&#9658;</i>
         </div>
@@ -67,7 +70,7 @@
 function init() {
   //var container = document.querySelectorAll('#mobile-gallery')[0];
   var gallery = null;
-  gallery = new MGallery('#mobile-gallery', null);
+  gallery = new MGallery('#mobile-gallery');
 
   var button = document.getElementById('trigger');
   button.addEventListener('click', function(){

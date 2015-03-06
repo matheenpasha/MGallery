@@ -50,6 +50,10 @@
 
     };
 
+    for (var i in options){
+      this.options[i] = options[i];
+    }
+
     // This list holds all the images.
     mGallery.viewportList = mGallery._galleryDom.querySelectorAll('ul')[0];
 
@@ -73,6 +77,9 @@
 
     //previous button
     mGallery.prevButton =  mGallery._galleryDom.querySelectorAll('.prev')[0];
+
+    //play/stop button
+    mGallery.playButton = mGallery._galleryDom.querySelectorAll('.play-control')[0];
 
     utils.each(mGallery.images, function (img){
       mGallery.galleryData.push({
@@ -164,24 +171,24 @@
 
     stopAutoplay: function() {
       var mGallery = this;
-      //domClass.remove(controls.playButton(), 'stop');
-      clearInterval(mGallery.autoplaytimer);
+      utils.removeClass(mGallery.playButton, 'pause');
+      clearInterval(mGallery.options.autoplaytimer);
       mGallery.showControls();
-      mGallery.autoplaytimer = null;
-      mGallery.autoPlay = false;
+      mGallery.options.autoplaytimer = null;
+      mGallery.options.autoPlay = false;
     },
 
     startAutoplay: function() {
       var mGallery = this;
-      mGallery.autoPlay = true;
-      //domClass.add(controls.playButton(), 'stop');
-      mGallery.autoplaytimer = setInterval(function() {
+      mGallery.options.autoPlay = true;
+      utils.addClass(mGallery.playButton, 'pause');
+      mGallery.options.autoplaytimer = setInterval(function() {
         if(mGallery.noOfImages === mGallery.scroller.currentPage.pageX + 1){
           mGallery.stopAutoplay();
         } else {
           mGallery.scroller.next();
         }
-      }, mGallery.autoplaygap);
+      }, mGallery.options.autoplaygap);
       mGallery.showControls();
     },
 
@@ -228,7 +235,7 @@
       }, false);
 
       utils.addEvent(mGallery.nextButton, 'click', function (){
-        if (!mGallery.autoPlay){
+        if (!mGallery.options.autoPlay){
           mGallery.scroller.next();
           mGallery.showControls();
         } else {
@@ -239,13 +246,21 @@
       }, false);
 
       utils.addEvent(mGallery.prevButton, 'click', function (){
-        if (!mGallery.autoPlay){
+        if (!mGallery.options.autoPlay){
           mGallery.scroller.prev();
           mGallery.showControls();
         } else {
           mGallery.stopAutoplay();
           mGallery.scroller.prev();
           mGallery.showControls();
+        }
+      }, false);
+
+      utils.addEvent(mGallery.playButton, 'click', function (){
+        if (!mGallery.options.autoPlay){
+          mGallery.startAutoplay();
+        } else {
+          mGallery.stopAutoplay();
         }
       }, false);
 
