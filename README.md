@@ -60,4 +60,4 @@ Finally build the Mgallery
 ```
 
 
-     To be continued...
+  That's it. Simple!
